@@ -1,9 +1,29 @@
+import hashlib
+from sqlite3 import Cursor
 import subprocess
+import sqlite3
 import re
 from flask import Flask, render_template, url_for, redirect, session, request 
 
 # Running up a instance as webapp
 webapp = Flask(__name__)
+
+
+# Password Digest
+def get_digest(password):
+    pwd = bytes(password, 'utf-8')
+    diget = hashlib.sha256(pwd).hexdigest()
+    return diget
+
+
+# DB connection
+sqlite_path = 'static/db/users.sqlite'
+connection = sqlite3.connect(sqlite_path)
+cursor = connection.cursor()
+cursor.execute('SELECT name, password FROM users')
+id_pwd_hash = dict(cursor.fetchall())
+connection.close()
+
 
 # TopPage
 @webapp.route('/')
