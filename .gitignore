@@ -2,3 +2,4 @@ LICENSE
 README.md
 raspi_venv
 .vscode
+syntax_check.py
