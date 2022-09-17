@@ -11,10 +11,10 @@
   + access restriction by user login
 
 + __Network Command__
- + Interface IP Address
- + Socket Information reload in 5 sec.
- + IP rouring table by "ip route" Command
+  + Interface IP Address
+  + Socket Information reload in 5 sec.
+  + IP rouring table by "ip route" Command
 
 + __Performance Command__
- + CPU/Mmory load by "free" and "vmstat" Command
- + Temparature of Raspberry Pi SoC
+  + CPU/Mmory load by "free" and "vmstat" Command
+  + Temparature of Raspberry Pi SoC
