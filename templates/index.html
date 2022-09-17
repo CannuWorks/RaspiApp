@@ -20,6 +20,7 @@
             </div>
             <div class="header-list">
                 <ul>
+                    <li><a href="{{ url_for('logout') }}">LOGOUT</a></li>
                     <li><a href="https://www.raspberrypi.com/documentation/" target="_blank" rel="noopener noreferrer">LINK</a></li>
                     <li><a href="{{ url_for('index') }}">HOME</a></li>
                 </ul>
@@ -27,7 +28,7 @@
         </div>
 
         <div class="main">
-            <h2> {{main_content}} </h2>
+            <h2> Diagnosis of Raspberry Pi </h2>
             <ul>
                 <h3><a href="{{ url_for('get_ip_addr') }}">Interface IP Address</a></h3>
                 <h3><a href="{{ url_for('get_socket') }}">Socket</a></h3>

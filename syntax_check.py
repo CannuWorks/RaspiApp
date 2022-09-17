@@ -1,6 +1,7 @@
 import subprocess
 import re
 from pprint import pprint
+import hashlib
 
 def get_ip_addr():
     get_ip_addr = subprocess.run(['ip', '-4', 'address'],
@@ -180,3 +181,11 @@ def get_vmstat():
     return result_list
 
 # pprint(get_vmstat())
+
+
+def get_digest(password):
+    pwd = bytes(password, 'utf-8')
+    diget = hashlib.sha256(pwd).hexdigest()
+    return diget
+
+pprint(get_digest('raspimin'))
