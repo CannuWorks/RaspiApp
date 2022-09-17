@@ -17,12 +17,14 @@ def get_digest(password):
 
 
 # DB connection
-sqlite_path = 'static/db/users.sqlite'
-connection = sqlite3.connect(sqlite_path)
-cursor = connection.cursor()
-cursor.execute('SELECT name, password FROM users')
-id_pwd_hash = dict(cursor.fetchall())
-connection.close()
+def get_user_data():
+    sqlite_path = 'static/db/users.sqlite'
+    connection = sqlite3.connect(sqlite_path)
+    cursor = connection.cursor()
+    cursor.execute('SELECT name, password FROM users')
+    id_pwd_hash = dict(cursor.fetchall())
+    connection.close()
+    return id_pwd_hash
 
 
 # TopPage
@@ -49,6 +51,7 @@ def logincheck():
 
     # make pwd hashed by "get_digest()"" function
     password = get_digest(pwd)
+    id_pwd_hash = get_user_data()
 
     if user_id in id_pwd_hash:
         if password == id_pwd_hash[user_id]:
