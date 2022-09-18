@@ -94,7 +94,7 @@ def get_ip_addr():
 
         cmd_result0 = cmd_result.splitlines()
         for read_line in cmd_result0:
-            if re.search('^\s*inet', read_line):
+            if re.search(r'^\s*inet', read_line):
                 read_line0 = read_line.lstrip(' ').rstrip('\n').split()
                 ip_addr_result.append(read_line0)
 
