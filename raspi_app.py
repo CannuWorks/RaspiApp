@@ -86,8 +86,8 @@ def get_ip_addr():
         return redirect(url_for('login'))
     else:
         get_ip_addr = subprocess.run(['ip', '-4', 'address'],
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
         cmd_result = get_ip_addr.stdout.decode('utf-8')
 
         ip_addr_result = []
@@ -156,8 +156,8 @@ def get_route():
         return redirect(url_for('login'))
     else:
         get_route_table = subprocess.run(['route'],
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE)
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.PIPE)
         cmd_result = get_route_table.stdout.decode('utf-8')
 
         route_result = []
@@ -181,8 +181,8 @@ def get_temp():
         return redirect(url_for('login'))
     else:
         get_temp = subprocess.run(['vcgencmd', 'measure_temp'],
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
+                                  stdout=subprocess.PIPE,
+                                  stderr=subprocess.PIPE)
         value0 = get_temp.stdout.decode('utf-8')
         value1 = value0.split('=')
         value2 = value1[1][:-2]
@@ -200,8 +200,8 @@ def get_disk():
     else:
         # Get disk info via "lsblk" command
         get_block_dev = subprocess.run(['lsblk'],
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
+                                       stdout=subprocess.PIPE,
+                                       stderr=subprocess.PIPE)
         lsblk_result = get_block_dev.stdout.decode('utf-8')
 
         result_list0 = []
@@ -235,8 +235,8 @@ def get_disk():
                 result_list2[0].remove('Mounted')
                 result_list2[0].remove('on')
 
-        return render_template('get_disk.html', lsblk_result=result_list0, 
-                                df_result=result_list2)
+        return render_template('get_disk.html', lsblk_result=result_list0,
+                               df_result=result_list2)
 
 
 # Get memory info via "free --mega -w" command
@@ -248,8 +248,7 @@ def get_mem():
         return redirect(url_for('login'))
     else:
         get_socket = subprocess.run(['free', '--mega', '-w'],
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         cmd_result = get_socket.stdout.decode('utf-8')
 
         result_list = []
@@ -263,6 +262,7 @@ def get_mem():
         result_list[2].extend(['', '', '', ''])
 
         return render_template('get_mem.html', result=result_list)
+
 
 # Get statistics of CPU, Mem, IO
 @app.route('/get_vmstat')
