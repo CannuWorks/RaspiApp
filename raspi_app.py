@@ -8,7 +8,9 @@ from flask import Flask, redirect, render_template, request, session, url_for
 
 # Running up a instance as app
 app = Flask(__name__)
+
 app.secret_key = os.urandom(21)  # id_pwd_hash = {'raspimin': 'raspimin'}
+
 
 # Password Digest
 def get_digest(password):
@@ -75,7 +77,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-#Get IP address via "ip -4 address" command
+# Get IP address via "ip -4 address" command
 @app.route('/get_ip_addr')
 def get_ip_addr():
     ''' Get IP address via "ip -4 address" command '''
@@ -106,7 +108,7 @@ def get_ip_addr():
         return render_template('get_ip_addr.html', result=result_dict)
 
 
-#Get Socket info via "ss -tu" command
+# Get Socket info via "ss -tu" command
 @app.route('/get_socket')
 def get_socket():
     ''' Get Socket info via "ss -tu" command '''
@@ -145,7 +147,7 @@ def get_socket():
         return render_template('get_socket.html', result=socket_list1)
 
 
-#Get IP routing table via "route" command
+# Get IP routing table via "route" command
 @app.route('/get_route')
 def get_route():
     ''' Get IP routing table via "route" command '''
@@ -170,7 +172,7 @@ def get_route():
         return render_template('get_route.html', result=route_result)
 
 
-#Get SoC temparature via "vcgencmd" command
+# Get SoC temparature via "vcgencmd" command
 @app.route('/get_temp')
 def get_temp():
     ''' Get SoC temparature via "vcgencmd" command '''
@@ -179,8 +181,8 @@ def get_temp():
         return redirect(url_for('login'))
     else:
         get_temp = subprocess.run(['vcgencmd', 'measure_temp'],
-                                stdout = subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
         value0 = get_temp.stdout.decode('utf-8')
         value1 = value0.split('=')
         value2 = value1[1][:-2]
@@ -188,7 +190,7 @@ def get_temp():
         return render_template('get_temp.html', result=cmd_result)
 
 
-#Get disk info via "lsbk" & "df -h" command
+# Get disk info via "lsbk" & "df -h" command
 @app.route('/get_disk')
 def get_disk():
     ''' Get disk info via "lsbk" & "df -h" command '''
@@ -196,7 +198,7 @@ def get_disk():
     if not session.get('login'):
         return redirect(url_for('login'))
     else:
-        #Get disk info via "lsblk" command
+        # Get disk info via "lsblk" command
         get_block_dev = subprocess.run(['lsblk'],
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
@@ -209,7 +211,7 @@ def get_disk():
             read_line0 = read_line.rstrip('\n').split()
             result_list0.append(read_line0)
 
-        #Get disk info via "df -h" command
+        # Get disk info via "df -h" command
         get_disk_usage = subprocess.run(['df', '-h'],
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE)
@@ -237,7 +239,7 @@ def get_disk():
                                 df_result=result_list2)
 
 
-#Get memory info via "free --mega -w" command
+# Get memory info via "free --mega -w" command
 @app.route('/get_mem')
 def get_mem():
     ''' Get memory info via "free --mega -w" command '''
@@ -262,7 +264,7 @@ def get_mem():
 
         return render_template('get_mem.html', result=result_list)
 
-#Get statistics of CPU, Mem, IO
+# Get statistics of CPU, Mem, IO
 @app.route('/get_vmstat')
 def get_vmstat():
     ''' Get statistics of CPU, Mem, IO '''
@@ -288,5 +290,4 @@ def get_vmstat():
 
 
 if __name__ == ('__main__'):
-    app.run(debug = True)
-
+    app.run(debug=True)

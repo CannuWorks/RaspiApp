@@ -1,50 +1,30 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <title>Diagnosis of Raspberry Pi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Ubuntu+Mono&display=swap"
-        rel="stylesheet">
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/theme_style.css') }}">
-</head>
+{% block title %}
 
-<body>
-    <div class="header">
-        <div class="header-img">
-            <a href="https://www.raspberrypi.com/" target="_blank" rel="noopener noreferrer"><img
-                    src="{{ url_for('static', filename='images/RPi-Logo.png') }}" alt="Raspi Logo"></a>
-        </div>
-        <div class="header-logo">
-            Raspberry Pi
-        </div>
-        <div class="header-list">
-            <ul>
-                <li><a href="https://www.raspberrypi.com/documentation/" target="_blank"
-                        rel="noopener noreferrer">LINK</a></li>
-                <li><a href="{{ url_for('index') }}">HOME</a></li>
-            </ul>
-        </div>
-    </div>
+Login Authentication
 
-    <div class="main">
-        <h2>Login Authentication</h2>
-        <h3>Please input User ID and Password!</h3>
-        <form method="POST" action="/logincheck">
-            <p><input placeholder="User ID" type="text" name="user_id"></p>
-            <p><input placeholder="Password" type="password" name="password"></p>
-            <p><input type="submit" value="SEND"></p>
-        </form>
-    </div>
+{% endblock %}
 
-    <div class="footer">
-        <div class="footer-copyright">
-            "Raspberry Pi is a trademark of Raspberry Pi Ltd”<br>
-            Software Copyright @MashCannu
-        </div>
-    </div>
-</body>
+{% block headerlist %}
 
-</html>
+<div class="header-list">
+    <ul>
+        <li><a href="https://www.raspberrypi.com/documentation/" target="_blank" rel="noopener noreferrer">LINK</a></li>
+        <li><a href="{{ url_for('index') }}">HOME</a></li>
+    </ul>
+</div>
+
+{% endblock %}
+
+{% block main %}
+
+<h2>Login Authentication</h2>
+<h3>Please input User ID and Password!</h3>
+<form method="POST" action="/logincheck">
+    <p><input placeholder="User ID" type="text" name="user_id"></p>
+    <p><input placeholder="Password" type="password" name="password"></p>
+    <p><input type="submit" value="SEND"></p>
+</form>
+
+{% endblock %}

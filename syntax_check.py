@@ -1,7 +1,8 @@
-import subprocess
-import re
-from pprint import pprint
 import hashlib
+import re
+import subprocess
+from pprint import pprint
+
 
 def get_ip_addr():
     get_ip_addr = subprocess.run(['ip', '-4', 'address'],
