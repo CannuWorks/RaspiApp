@@ -1,11 +1,6 @@
-LICENSE
-README.md
 raspi_venv
-BK
 syntax_check.py
 .vscode
-.gitignore
-
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,flask,vscode
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,flask,vscode
