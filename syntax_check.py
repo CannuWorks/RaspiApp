@@ -184,9 +184,25 @@ def get_vmstat():
 # pprint(get_vmstat())
 
 
-def get_digest(password):
+def get_digest256(password):
     pwd = bytes(password, 'utf-8')
     diget = hashlib.sha256(pwd).hexdigest()
     return diget
 
-pprint(get_digest('raspimin'))
+
+def get_digest224(password):
+    pwd = bytes(password, 'utf-8')
+    diget = hashlib.sha224(pwd).hexdigest()
+    return diget
+
+
+ubuntumin_sha224 = get_digest224('ubuntumin')
+ubuntumin_sha256 = get_digest256('Mk970101')
+
+raspimin_sha224 = get_digest224('raspimin')
+raspimin_sha256 = get_digest256('Mk970101')
+
+print(f'Ubuntumin for Git : {ubuntumin_sha224}')
+print(f'mashcannu for AWS : {ubuntumin_sha256}')
+print(f'Raspimin for Git : {raspimin_sha224}')
+print(f'mashcannu for Raspi : {raspimin_sha256}')
