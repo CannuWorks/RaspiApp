@@ -248,7 +248,8 @@ def get_mem():
         return redirect(url_for('login'))
     else:
         get_socket = subprocess.run(['free', '--mega', '-w'],
-                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
         cmd_result = get_socket.stdout.decode('utf-8')
 
         result_list = []
