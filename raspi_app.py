@@ -1,9 +1,11 @@
-import subprocess
 import re
-from flask import Flask, render_template, url_for, redirect, session, request 
+import subprocess
+
+from flask import Flask, render_template
 
 # Running up a instance as webapp
 webapp = Flask(__name__)
+
 
 # TopPage
 @webapp.route('/')
@@ -14,7 +16,7 @@ def index():
     return render_template('index.html', main_content=main_content)
 
 
-#Get IP address via "ip -4 address" command
+# Get IP address via "ip -4 address" command
 @webapp.route('/get_ip_addr')
 def get_ip_addr():
     ''' Get IP address via "ip -4 address" command '''
@@ -42,7 +44,7 @@ def get_ip_addr():
     return render_template('get_ip_addr.html', result=result_dict)
 
 
-#Get Socket info via "ss -tu" command
+# Get Socket info via "ss -tu" command
 @webapp.route('/get_socket')
 def get_socket():
     ''' Get Socket info via "ss -tu" command '''
@@ -78,14 +80,14 @@ def get_socket():
     return render_template('get_socket.html', result=socket_list1)
 
 
-#Get IP routing table via "route" command
+# Get IP routing table via "route" command
 @webapp.route('/get_route')
 def get_route():
     ''' Get IP routing table via "route" command '''
 
     get_route_table = subprocess.run(['route'],
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE)
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
     cmd_result = get_route_table.stdout.decode('utf-8')
 
     route_result = []
@@ -100,14 +102,14 @@ def get_route():
     return render_template('get_route.html', result=route_result)
 
 
-#Get SoC temparature via "vcgencmd" command
+# Get SoC temparature via "vcgencmd" command
 @webapp.route('/get_temp')
 def get_temp():
     ''' Get SoC temparature via "vcgencmd" command '''
 
     get_temp = subprocess.run(['vcgencmd', 'measure_temp'],
-                            stdout = subprocess.PIPE,
-                            stderr=subprocess.PIPE)
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE)
     value0 = get_temp.stdout.decode('utf-8')
     value1 = value0.split('=')
     value2 = value1[1][:-2]
@@ -115,12 +117,12 @@ def get_temp():
     return render_template('get_temp.html', result=cmd_result)
 
 
-#Get disk info via "lsbk" & "df -h" command
+# Get disk info via "lsbk" & "df -h" command
 @webapp.route('/get_disk')
 def get_disk():
     ''' Get disk info via "lsbk" & "df -h" command '''
 
-    #Get disk info via "lsblk" command
+    # Get disk info via "lsblk" command
     get_block_dev = subprocess.run(['lsblk'],
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
@@ -133,7 +135,7 @@ def get_disk():
         read_line0 = read_line.rstrip('\n').split()
         result_list0.append(read_line0)
 
-    #Get disk info via "df -h" command
+    # Get disk info via "df -h" command
     get_disk_usage = subprocess.run(['df', '-h'],
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
@@ -157,11 +159,11 @@ def get_disk():
             result_list2[0].remove('Mounted')
             result_list2[0].remove('on')
 
-    return render_template('get_disk.html', lsblk_result=result_list0, 
-                            df_result=result_list2)
+    return render_template('get_disk.html', lsblk_result=result_list0,
+                           df_result=result_list2)
 
 
-#Get memory info via "free --mega -w" command
+# Get memory info via "free --mega -w" command
 @webapp.route('/get_mem')
 def get_mem():
     ''' Get memory info via "free --mega -w" command '''
@@ -183,11 +185,12 @@ def get_mem():
 
     return render_template('get_mem.html', result=result_list)
 
-#Get statistics of CPU, Mem, IO
+
+# Get statistics of CPU, Mem, IO
 @webapp.route('/get_vmstat')
 def get_vmstat():
     ''' Get statistics of CPU, Mem, IO '''
-    
+
     get_socket = subprocess.run(['vmstat'],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
@@ -206,5 +209,4 @@ def get_vmstat():
 
 
 if __name__ == ('__main__'):
-    webapp.run(debug = True)
-
+    webapp.run(debug=True, host='0.0.0.0', port=5050)
