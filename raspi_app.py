@@ -15,7 +15,7 @@ app.secret_key = os.urandom(21)  # id_pwd_hash = {'raspimin': 'raspimin'}
 # Password Digest
 def get_digest(password):
     pwd = bytes(password, 'utf-8')
-    diget = hashlib.sha256(pwd).hexdigest()
+    diget = hashlib.sha224(pwd).hexdigest()
     return diget
 
 
