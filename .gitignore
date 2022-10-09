@@ -1,6 +1,6 @@
 # local env for RaspiApp
-raspi_venv
-.vscode/*.json
+raspi_venv/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
