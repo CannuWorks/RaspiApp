@@ -11,6 +11,7 @@ instance/*
 .env
 
 ### Flask.Python Stack ###
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -33,6 +34,7 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -76,6 +78,7 @@ db.sqlite3-journal
 
 # Flask stuff:
 instance/
+.webassets-cache
 
 # Scrapy stuff:
 .scrapy
@@ -132,6 +135,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.env
 .venv
 env/
 venv/
@@ -156,7 +160,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
 # pytype static type analyzer
 .pytype/
 
