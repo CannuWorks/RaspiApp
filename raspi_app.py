@@ -9,7 +9,11 @@ from flask import Flask, redirect, render_template, request, session, url_for
 # Running up a instance as app
 app = Flask(__name__)
 
-app.secret_key = os.urandom(21)  # id_pwd_hash = {'raspimin': 'raspimin'}
+app.secret_key = os.urandom(21)  
+# """
+# default user id (name) and password are;
+#     id_pwd_hash = {'raspimin': 'raspimin'}
+# """
 
 
 # Password Digest
