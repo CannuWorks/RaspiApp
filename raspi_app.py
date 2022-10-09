@@ -9,7 +9,7 @@ from flask import Flask, redirect, render_template, request, session, url_for
 # Running up a instance as app
 app = Flask(__name__)
 
-app.secret_key = os.urandom(21)  
+app.secret_key = os.urandom(21)
 # """
 # default user id (name) and password are;
 #     id_pwd_hash = {'raspimin': 'raspimin'}
@@ -294,5 +294,5 @@ def get_vmstat():
         return render_template('get_vmstat.html', result=result_list)
 
 
-# if __name__ == ('__main__'):
-#     app.run(debug=True, host='0.0.0.0', port=5050)
+if __name__ == ('__main__'):
+    app.run(debug=True, host='0.0.0.0', port=5050)
