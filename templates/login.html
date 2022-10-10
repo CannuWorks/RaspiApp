@@ -21,6 +21,17 @@ Login Authentication
 
 <h2>Login Authentication</h2>
 <h3>Please input User ID and Password!</h3>
+
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<li>
+    <i>
+        <font color="orange">{{ message }}</font>
+    </i>
+</li>
+{% endfor %}
+{% endwith %}
+
 <form method="POST" action="/logincheck">
     <p><input placeholder="User ID" type="text" name="user_id"></p>
     <p><input placeholder="Password" type="password" name="password"></p>
