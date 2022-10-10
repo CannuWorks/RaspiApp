@@ -4,7 +4,8 @@ import re
 import sqlite3
 import subprocess
 
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import (Flask, flash, redirect, render_template, request, session,
+                   url_for)
 
 # Running up a instance as app
 app = Flask(__name__)
@@ -64,8 +65,10 @@ def logincheck():
         if password == id_pwd_hash[user_id]:
             session['login'] = True
         else:
+            flash('Authentication failed! Please check your input.')
             session['login'] = False
     else:
+        flash('Authentication failed! Please check your input.')
         session['login'] = False
 
     if session['login']:
